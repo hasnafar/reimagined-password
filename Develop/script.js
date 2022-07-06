@@ -1,9 +1,10 @@
-// Assignment Code
+// Global variables are declared here.
 var generateBtn = document.querySelector("#generate");
 var length;
 
+// Takes arguments from generatePassword function to make the password.
 
-function makeid(passwordLength, uc, lc, nc, sc) {
+function makepwd(passwordLength, uc, lc, nc, sc) {
   
   var result= '';
 
@@ -16,6 +17,8 @@ function makeid(passwordLength, uc, lc, nc, sc) {
   var selector = [uc,lc,nc,sc];
   
   var copyAllOptions= [];
+
+  //Creates a copy of allOptions array based on user choices
   
   for (var i=0;i<selector.length;i++) {
   	
@@ -24,7 +27,6 @@ function makeid(passwordLength, uc, lc, nc, sc) {
     }
   }
 
-
   for(var i=0;i<passwordLength;i++){
   
   var stringSelector = Math.floor(Math.random()*copyAllOptions.length)+1;
@@ -32,7 +34,7 @@ function makeid(passwordLength, uc, lc, nc, sc) {
   if(stringSelector===1){
 
     var charToAdd = copyAllOptions[0].charAt(Math.floor(Math.random() * copyAllOptions[0].length));
-    result=result+charToAdd; //result+=chartoAdd
+    result=result+charToAdd; 
 
   }
 
@@ -56,7 +58,8 @@ function makeid(passwordLength, uc, lc, nc, sc) {
 }
 
 
-
+// The use will first be prompted to pick a password length between 8-128 characters. 
+// They will only move on once a length between 8-128 characters is selected.
 function generatePassword() {
 length = prompt("How long do you want your password to be? Choose between 8 and 128 characters.");
 
@@ -67,8 +70,7 @@ while (length > 128) {
  length = prompt("Please choose between 8 and 128 characters in length");
 }
 
-
-
+// Prompts to confirm character choices. At least one criteria must be chosen.
 while(true) {
 
   var selectUppercase = confirm ("Click OK to include uppercase characters.");
@@ -84,13 +86,12 @@ else
 }
 
 
-return makeid(length,selectUppercase,selectLowercase,selectNumeric,selectSpecial);
+return makepwd(length,selectUppercase,selectLowercase,selectNumeric,selectSpecial);
 
 }
 
 
-
-// Write password to the #password input
+// The password will be written on the page.
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -99,6 +100,6 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
+// Once the generate button is clicked, the prompts will start.
 document.getElementById("generate").addEventListener("click", writePassword)
 
